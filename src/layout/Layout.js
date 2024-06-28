@@ -13,7 +13,7 @@ function Layout() {
       <Menu />
       <div className="container">
         <Switch>
-          <Route path="/observations/new">
+        <Route path="/observations/new">
             <ObservationCreate />
           </Route>
           <Route exact={true} path="/">

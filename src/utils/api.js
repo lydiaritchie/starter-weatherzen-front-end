@@ -46,21 +46,23 @@ async function fetchJson(url, options) {
 }
 
 
-const observations = [];
-
-function nextId(){
-  const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
-  return uint32.toString(16);
+export async function createObservation(observation, signal) {
+  const url = `${API_BASE_URL}/observations`;
+  console.log(url);
+  const options = {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ data: observation }),
+    signal,
+  };
+  return await fetchJson(url, options);
 }
 
-export async function createObservation(observation, signal) {
-  const now = new Date().toISOString();
-  const newObservation = {
-    ...observation,
-    observation_id: nextId(),
-    created_at: now,
-    updated_at: now,
+export async function listObservations(signal){
+  const url = `${API_BASE_URL}/observations`;
+  const options = {
+    headers,
+    signal,
   };
-  observations.push(newObservation);
-  return newObservation;
+  return await fetchJson(url, options);
 }
