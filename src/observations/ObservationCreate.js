@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createObservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
@@ -10,7 +10,7 @@ function ObservationCreate() {
   const [observation, setObservation] = useState({
     latitude: "",
     longitude: "",
-    sky_connection: "",
+    sky_condition: "",
   });
 
   function cancelHandler() {
@@ -19,11 +19,11 @@ function ObservationCreate() {
 
   function submitHandler(event) {
     event.preventDefault();
-      createObservation(observation)
-         .then(() => {
-           history.push("/");
-          })
-         .catch(setError);
+    createObservation(observation)
+      .then(() => {
+        history.push("/");
+      })
+      .catch(setError);
   }
 
   function changeHandler({ target: { name, value } }) {
@@ -35,8 +35,8 @@ function ObservationCreate() {
 
   return (
     <main>
-       <h1 className="mb-3">Create Observation</h1>
-       <ErrorAlert error={error}/>
+      <h1 className="mb-3">Create Observation</h1>
+      <ErrorAlert error={error} />
       <form onSubmit={submitHandler} className="mb-4">
         <div className="row mb-3">
           <div className="col-6 form-group">
@@ -54,7 +54,9 @@ function ObservationCreate() {
               onChange={changeHandler}
               required={true}
             />
-            <small className="form-text text-muted">Enter a value between -90 and 90.</small>
+            <small className="form-text text-muted">
+              Enter a value between -90 and 90.
+            </small>
           </div>
           <div className="col-6">
             <label className="form-label" htmlFor="longitude">
@@ -71,7 +73,9 @@ function ObservationCreate() {
               onChange={changeHandler}
               required={true}
             />
-            <small className="form-text text-muted">Enter a value between -180 and 180.</small>
+            <small className="form-text text-muted">
+              Enter a value between -180 and 180.
+            </small>
           </div>
         </div>
         <div className="mb-3">
@@ -94,7 +98,7 @@ function ObservationCreate() {
             <option value="104">Raining</option>
             <option value="106">Snowing</option>
             <option value="108">Hailing</option>
-           <option value="109">Thunderstorms</option>
+            <option value="109">Thunderstorms</option>
           </select>
         </div>
         <div>
